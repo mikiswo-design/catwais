@@ -3,68 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高次脳機能評価 判定ツール</title>
+    <title>高次脳機能評価 判定ツール（詳細版）</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f8f9fa; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: var(--bg); }
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        h1, h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .input-item { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9em; }
-        input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        button { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-size: 1.1em; width: 100%; transition: 0.3s; }
+        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; }
+        body { font-family: -apple-system, sans-serif; line-height: 1.5; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: var(--bg); }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1, h2, h3 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .input-group { margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+        label { font-size: 0.85em; font-weight: bold; width: 65%; }
+        input { width: 30%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; text-align: right; }
+        button { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 1.1em; width: 100%; margin-top: 10px; font-weight: bold; }
         button:hover { background: #2980b9; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background: #f2f2f2; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #eee; position: sticky; top: 0; }
         .status-low { background: #ffebee; color: #c62828; font-weight: bold; }
-        .status-border { background: #fff3e0; color: #ef6c00; font-weight: bold; }
         .status-normal { background: #e8f5e9; color: #2e7d32; }
+        .func-tag { font-size: 0.8em; color: #666; display: block; }
     </style>
 </head>
 <body>
 
-    <h1>高次脳機能評価 判定ツール</h1>
+    <h1>高次脳機能評価 判定アシスタント</h1>
 
     <div class="card">
-        <h2>1. 基本情報</h2>
-        <div class="input-item">
-            <label>年齢 (18-90歳) ※必須</label>
-            <input type="number" id="age" placeholder="例: 65">
+        <h3>基本情報</h3>
+        <div class="input-group">
+            <label>対象者年齢 (18-90歳):</label>
+            <input type="number" id="age" placeholder="年齢">
         </div>
     </div>
 
     <div class="grid">
         <div class="card">
             <h2>WAIS-IV (合成得点)</h2>
-            <div class="input-item"><label>FSIQ (全検査IQ)</label><input type="number" id="wais_fsiq"></div>
-            <div class="input-item"><label>VCI (言語理解)</label><input type="number" id="wais_vci"></div>
-            <div class="input-item"><label>PRI (知覚推理)</label><input type="number" id="wais_pri"></div>
-            <div class="input-item"><label>WMI (ワーキングメモリ)</label><input type="number" id="wais_wmi"></div>
-            <div class="input-item"><label>PSI (処理速度)</label><input type="number" id="wais_psi"></div>
+            <div class="input-group"><label>FSIQ (全検査)</label><input type="number" id="wais_fsiq"></div>
+            <div class="input-group"><label>VCI (言語理解)</label><input type="number" id="wais_vci"></div>
+            <div class="input-group"><label>PRI (知覚推理)</label><input type="number" id="wais_pri"></div>
+            <div class="input-group"><label>WMI (作動記憶)</label><input type="number" id="wais_wmi"></div>
+            <div class="input-group"><label>PSI (処理速度)</label><input type="number" id="wais_psi"></div>
         </div>
 
         <div class="card">
             <h2>CAT (標準注意検査法)</h2>
-            <div class="input-item"><label>TMT-A (秒)</label><input type="number" id="cat_tmt_a"></div>
-            <div class="input-item"><label>TMT-B (秒)</label><input type="number" id="cat_tmt_b"></div>
-            <div class="input-item"><label>PASAT 3.0s (正答数)</label><input type="number" id="cat_pasat3"></div>
-            <div class="input-item"><label>PASAT 2.0s (正答数)</label><input type="number" id="cat_pasat2"></div>
+            
+            <h3>① Span (スパン)</h3>
+            <div class="input-group"><label>数唱（順唱）</label><input type="number" id="cat_span_d_f"></div>
+            <div class="input-group"><label>数唱（逆唱）</label><input type="number" id="cat_span_d_b"></div>
+            <div class="input-group"><label>視覚性（順唱）</label><input type="number" id="cat_span_v_f"></div>
+            <div class="input-group"><label>視覚性（逆唱）</label><input type="number" id="cat_span_v_b"></div>
+
+            <h3>② 抹消・検出課題 (秒)</h3>
+            <div class="input-group"><label>抹消課題 所要時間</label><input type="number" id="cat_cancel_time"></div>
+
+            <h3>③ SDMT (正答数)</h3>
+            <div class="input-group"><label>SDMT 正答数</label><input type="number" id="cat_sdmt"></div>
+
+            <h3>④ 記憶更新 (正答数)</h3>
+            <div class="input-group"><label>記憶更新検査</label><input type="number" id="cat_mem_up"></div>
+
+            <h3>⑤ PASAT (正答数)</h3>
+            <div class="input-group"><label>PASAT 3.0s</label><input type="number" id="cat_pasat3"></div>
+            <div class="input-group"><label>PASAT 2.0s</label><input type="number" id="cat_pasat2"></div>
+
+            <h3>⑥ 上中下検査 (反応時間/ms)</h3>
+            <div class="input-group"><label>平均反応時間</label><input type="number" id="cat_pos_time"></div>
+
+            <h3>⑦ CPT (正答数)</h3>
+            <div class="input-group"><label>CPT 正答数</label><input type="number" id="cat_cpt"></div>
         </div>
     </div>
 
-    <button onclick="diagnose()">結果を判定・意味付けする</button>
+    <button onclick="diagnose()">詳細判定を実行</button>
 
     <div id="resultArea" style="display:none;" class="card">
-        <h2>判定結果一覧</h2>
-        <table>
+        <h2>判定結果報告</h2>
+        <table id="resultTable">
             <thead>
                 <tr>
                     <th>評価項目</th>
+                    <th>評価される注意機能</th>
                     <th>入力値</th>
-                    <th>判定</th>
-                    <th>臨床的意味付け</th>
+                    <th>判定・意味付け</th>
                 </tr>
             </thead>
             <tbody id="resultBody"></tbody>
@@ -72,73 +93,70 @@
     </div>
 
 <script>
-// CAT基準値データ (マニュアルに基づいた年代別近似値)
-const CAT_DATA = [
-    { range: [18, 39], tmta: 45, tmtb: 90, pasat3: 40, pasat2: 35 },
-    { range: [40, 59], tmta: 60, tmtb: 130, pasat3: 35, pasat2: 25 },
-    { range: [60, 74], tmta: 85, tmtb: 180, pasat3: 25, pasat2: 15 },
-    { range: [75, 90], tmta: 110, tmtb: 240, pasat3: 15, pasat2: 10 }
-];
+// 年齢別カットオフ値の定義（目安値。マニュアル等で微調整してください）
+const NORMS = {
+    young: { tm: 40, sdmt: 50, mem: 10, p3: 45, p2: 35, pos: 500, cpt: 55, span: 5 },
+    middle: { tm: 55, sdmt: 40, mem: 8, p3: 35, p2: 25, pos: 650, cpt: 50, span: 4 },
+    senior: { tm: 80, sdmt: 30, mem: 6, p3: 20, p2: 12, pos: 850, cpt: 45, span: 4 }
+};
 
-function getWaisInfo(score) {
-    if (score >= 130) return { label: "非常に高い", class: "status-normal", desc: "上位2.2%。非常に優れた知的能力。" };
-    if (score >= 120) return { label: "高い", class: "status-normal", desc: "上位9%。高い知的能力。" };
-    if (score >= 110) return { label: "平均の上", class: "status-normal", desc: "平均より良好。" };
-    if (score >= 90)  return { label: "平均", class: "status-normal", desc: "同年代の標準的な範囲。" };
-    if (score >= 80)  return { label: "平均の下", class: "status-border", desc: "日常生活に支障はないが、慎重な対応を要する場合がある。" };
-    if (score >= 70)  return { label: "低い(境界線)", class: "status-border", desc: "知的障害との境界域。サポートが必要な可能性。" };
-    return { label: "非常に低い", class: "status-low", desc: "全般的な知的発達の遅れ、または著しい機能低下。" };
+function getAgeGroup(age) {
+    if (age < 40) return 'young';
+    if (age < 65) return 'middle';
+    return 'senior';
+}
+
+function getWaisLabel(score) {
+    if (score >= 130) return { l: "非常に高い", c: "status-normal" };
+    if (score >= 90)  return { l: "平均的", c: "status-normal" };
+    if (score >= 80)  return { l: "平均の下", c: "status-low" };
+    return { l: "低い", c: "status-low" };
 }
 
 function diagnose() {
     const age = parseInt(document.getElementById('age').value);
     if (isNaN(age)) { alert("年齢を入力してください"); return; }
-
+    
+    const n = NORMS[getAgeGroup(age)];
     const tbody = document.getElementById('resultBody');
     tbody.innerHTML = "";
-    
-    // WAIS判定
-    const waisList = [
-        { id: 'wais_fsiq', name: 'WAIS: 全検査(FSIQ)' },
-        { id: 'wais_vci', name: 'WAIS: 言語理解(VCI)' },
-        { id: 'wais_pri', name: 'WAIS: 知覚推理(PRI)' },
-        { id: 'wais_wmi', name: 'WAIS: ワーキングメモリ(WMI)' },
-        { id: 'wais_psi', name: 'WAIS: 処理速度(PSI)' }
-    ];
 
-    waisList.forEach(item => {
-        const val = document.getElementById(item.id).value;
-        if (val !== "") {
-            const info = getWaisInfo(parseInt(val));
-            addRow(item.name, val, info.label, info.desc, info.class);
+    // 判定ロジック関数
+    const check = (id, name, func, norm, type, unit) => {
+        const val = parseFloat(document.getElementById(id).value);
+        if (isNaN(val)) return;
+        let isLow = type === 'time' ? val > norm : val < norm;
+        let label = isLow ? "低下の疑い" : "年齢相応";
+        let cls = isLow ? "status-low" : "status-normal";
+        addRow(name, func, val + unit, `<span class="${cls}">${label}</span>`);
+    };
+
+    // WAIS
+    const waisIds = ['fsiq','vci','pri','wmi','psi'];
+    waisIds.forEach(id => {
+        const val = document.getElementById('wais_'+id).value;
+        if(val) {
+            const info = getWaisLabel(val);
+            addRow('WAIS: '+id.toUpperCase(), '全般的知的機能', val, `<span class="${info.c}">${info.l}</span>`);
         }
     });
 
-    // CAT判定
-    const catNorm = CAT_DATA.find(d => age >= d.range[0] && age <= d.range[1]) || CAT_DATA[3];
-    const catInputs = [
-        { id: 'cat_tmt_a', name: 'CAT: TMT-A', norm: catNorm.tmta, type: 'time', desc: '視覚探索・持続的注意' },
-        { id: 'cat_tmt_b', name: 'CAT: TMT-B', norm: catNorm.tmtb, type: 'time', desc: '注意の切り替え・分配' },
-        { id: 'cat_pasat3', name: 'CAT: PASAT 3s', norm: catNorm.pasat3, type: 'score', desc: '計算を伴う持続的注意' },
-        { id: 'cat_pasat2', name: 'CAT: PASAT 2s', norm: catNorm.pasat2, type: 'score', desc: 'より高負荷な注意・処理速度' }
-    ];
-
-    catInputs.forEach(item => {
-        const val = parseInt(document.getElementById(item.id).value);
-        if (!isNaN(val)) {
-            let isLow = item.type === 'time' ? val > item.norm : val < item.norm;
-            let label = isLow ? "低下の疑い" : "年齢相応";
-            let cls = isLow ? "status-low" : "status-normal";
-            addRow(item.name, val + (item.type === 'time' ? "秒" : "点"), label, item.desc, cls);
-        }
-    });
+    // CAT 7項目
+    check('cat_span_d_f', '数唱(順唱)', '短期記憶', n.span, 'score', '桁');
+    check('cat_span_d_b', '数唱(逆唱)', '作動記憶(WM)', n.span-1, 'score', '桁');
+    check('cat_cancel_time', '抹消課題', '持続性・選択性注意', n.tm, 'time', '秒');
+    check('cat_sdmt', 'SDMT', '分配性注意', n.sdmt, 'score', '点');
+    check('cat_mem_up', '記憶更新検査', '作動記憶(WM)', n.mem, 'score', '点');
+    check('cat_pasat3', 'PASAT 3s', '分配性注意', n.p3, 'score', '点');
+    check('cat_pasat2', 'PASAT 2s', '分配性注意', n.p2, 'score', '点');
+    check('cat_pos_time', '上中下検査', '転換性注意', n.pos, 'time', 'ms');
+    check('cat_cpt', 'CPT', '持続性・選択性注意', n.cpt, 'score', '点');
 
     document.getElementById('resultArea').style.display = "block";
 }
 
-function addRow(name, val, label, desc, cls) {
-    const row = `<tr><td>${name}</td><td>${val}</td><td class="${cls}">${label}</td><td>${desc}</td></tr>`;
-    document.getElementById('resultBody').innerHTML += row;
+function addRow(name, func, val, judge) {
+    document.getElementById('resultBody').innerHTML += `<tr><td>${name}</td><td><span class="func-tag">${func}</span></td><td>${val}</td><td>${judge}</td></tr>`;
 }
 </script>
 </body>
